@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTU : Home Page</title>
+    <link rel="icon" type="image/png" href="DTU_official_logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navi flex justify-around bg-red-700 text-white">
+    <h1>Jobs@DTU</h1>
+    <h1>Tender</h1>
+    <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm" target="_blank"><h1>Fee Payment Gateway</h1></a>
+    <h1>TNP</h1>
+    <h1>RTI</h1>
+    <a href="https://www.nirfindia.org/nirfpdfcdn/2023/pdf/Engineering/IR-E-U-0098.pdf" target="_blank"><h1>NIRF</h1></a>
+    <a href="https://www.dtu.ac.in/Web/notice/iso.pdf" target="_blank"><h1>ISO 2008:2015</h1></a>
+    <h1>Contact Us</h1>
+</nav>
+
+<!-- Image Section -->
+<nav class="images flex justify-around" style="background-color: rgb(196, 236, 252);">
+    <img src="DTU_official_logo.png" alt="DTU Logo" class="h-20 w-25 px-10 py-0"> 
+    <img src="Screenshot 2024-03-26 at 3,00,58 AM_processed.png" alt="Campus Image" class="h-20 w-25 px-10 py-1">
+    <img src="G20Whiteback_processed.jpg" alt="G20 Image" class="h-20 w-25 px-10 py-2">
+</nav>
+
+<!-- Main Banner -->
+<div>
+    <img src="delhi_technological_university_formerly_dce_cover.jpeg" alt="DTU Cover Image" class="absolute">
+
+    <!-- Secondary Navigation -->
+    <nav class="flex justify-around relative font-semibold">
+        <h1>Home</h1>
+        <h1>About Us</h1>
+        <h1>Administration</h1>
+        <h1>Academics</h1>
+        <h1>Admissions</h1>
+        <h1>Alumni</h1>
+        <h1>Media</h1>
+        <h1>Life@DTU</h1> 
+    </nav>
+</div>
+
+<!-- About DTU Section -->
+<div class="aboutdtu text-black mt-10">
+    <h1 class="px-5 font-bold text-xl">About <span class="text-blue-800 font-bold">Delhi Technological University</span></h1>
+    <h2 class="px-5 font-bold text-xl text-blue-800">________</h2>
+    <p class="px-5">
+        Delhi Technological University has an illustrious history of providing quality education and promoting research and entrepreneurship for over eight decades. With 82 years of its long-established tradition of excellence in engineering & technology education, research, and innovations, <b>Delhi College of Engineering</b> (initially established as Delhi Polytechnic) was founded in 1941 to cater to the needs of Indian industries for trained technical manpower with practical experience and sound theoretical knowledge. 
+        <br><br>
+        <button class="h-8 px-5 text-black border border-black-700 rounded hover:bg-blue-800 hover:text-white">Know More...</button>
+    </p>
+</div>
+
+<!-- Rankings Section -->
+<div class="campus_ranking bg-blue-800 mt-5">
+    <h1 class="px-5 py-2 font-bold text-xl text-white">Rankings</h1>
+    <img src="rankings.png" alt="Rankings" class="px-5 py-1">
+</div>
+
+<!-- Script Section -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle the first-level dropdown
+        document.getElementById('multiLevelDropdownButton').addEventListener('click', function() {
+            document.getElementById('multi-dropdown').classList.toggle('hidden');
+        });
+
+        // Toggle the second-level dropdown
+        document.getElementById('doubleDropdownButton').addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevent the click from propagating to the document
+            document.getElementById('doubleDropdown').classList.toggle('hidden');
+        });
+
+        // Close the dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const multiDropdown = document.getElementById('multi-dropdown');
+            const doubleDropdown = document.getElementById('doubleDropdown');
+            
+            if (!multiDropdown.contains(event.target) && !document.getElementById('multiLevelDropdownButton').contains(event.target)) {
+                multiDropdown.classList.add('hidden');
+            }
+
+            if (!doubleDropdown.contains(event.target) && !document.getElementById('doubleDropdownButton').contains(event.target)) {
+                doubleDropdown.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
