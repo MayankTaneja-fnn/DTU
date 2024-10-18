@@ -81,13 +81,13 @@ function StudentRegister() {
     }
 
   return (
-    <div className='pt-80 md:pt-[8.7rem]'>
+    <div className=''>
         {errors && <div className='text-red-500 mt-2'>{errors}</div>}
 
         <div className='w-[100%] flex justify-center items-center h-auto relative'>
-            <img src='../../logo/delhi_technological_university_formerly_dce_cover.jpeg' className='opacity-60 w-screen h-screen'/>
-            <div className='w-[32%] rounded-md h-auto absolute bg-slate-100 bg-opacity-75 md:w-[32%] sm:w-[90%] sm:p-4 '>
-                <div className='text-2xl font-bold font-sans ml-2 md:ml-28 mt-4 text-slate-800'>
+            <img src='../../logo/delhi_technological_university_formerly_dce_cover.jpeg' className='opacity-95 w-screen h-screen'/>
+            <div className='w-[32%] rounded-md h-auto absolute bg-slate-100 bg-opacity-85 md:w-[32%] sm:w-[90%] sm:p-4 '>
+                <div className='text-2xl font-bold flex w-full justify-center font-sans mt-4 text-slate-800'>
                     Student Register
                 </div>
                 <div className='ml-3'>

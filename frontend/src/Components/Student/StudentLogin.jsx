@@ -61,12 +61,12 @@ function StudentLogin() {
     }
 
   return (
-    <div className='pt-80 md:pt-[8.7rem]'>
+    <div className=''>
          {errors && <div className='text-red-500 mt-2'>{errors}</div>}
         <div className='w-[100%] flex justify-center items-center h-screen relative'>
-            <img src='../../logo/delhi_technological_university_formerly_dce_cover.jpeg' className='opacity-60 w-screen h-screen'/>
+            <img src='../../logo/delhi_technological_university_formerly_dce_cover.jpeg' className='opacity-95 w-screen h-screen'/>
             <div className='w-[32%] rounded-md h-[70%] absolute bg-slate-100 bg-opacity-75 sm:w-[70%] md:w-[50%] lg:w-[32%]  lg:h-[70%]'>
-                <div className='text-xl lg:text-2xl font-bold font-sans ml-[2%] md:ml-[18%] mt-4 text-slate-800'>
+                <div className='text-xl lg:text-2xl flex justify-center w-full font-bold font-sans mt-4 text-slate-800'>
                     Student Login
                 </div>
                 <div className='ml-3'>

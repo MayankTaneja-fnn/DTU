@@ -63,7 +63,7 @@ const getAttendance=asyncHandler(async(req,res)=>{
     else{
         res.status(201)
         .json(
-            new ApiResponse(201, student.attendance, " successfully")
+            new ApiResponse(201, student, " successfully")
         )
     }
 

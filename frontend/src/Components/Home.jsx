@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/controller";
 import { useSwiper } from 'swiper/react';
+import { useState,useEffect } from 'react';
 
 const programmes = [
   "../../Programmes/img1.jpg",
@@ -28,12 +29,42 @@ const images = [
 function Home() {
   const swiper = useSwiper();
 
+
+  // This effect will listen for the scroll event
+  const [showNav, setShowNav] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // This effect will listen for the scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 120 && currentScrollY > lastScrollY) {
+        // If the scroll is greater than 50px and scrolling down
+        setShowNav(true);
+      } else if (currentScrollY < lastScrollY) {
+        // When scrolling up, hide the nav
+        setShowNav(false);
+      }
+      
+      // Update the last scroll position
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
-    <div className='pt-[22.5rem] md:pt-[8.7rem]'>
+    <div className={`${showNav?'transform translate-y-[1.35rem]':null} `}>
 
       {/* Swiper Carousel */}
       <div>
-        <Swiper
+        {/* <Swiper
           speed={500}
           loop={true}
           cssMode={true}
@@ -43,15 +74,15 @@ function Home() {
           autoplay
         >
           {images.map((img, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index}> */}
               <img
-                src={img}
-                alt={`slide-${index + 1}`}
-                className='w-full max-w-full h-[200px] md:h-[400px] lg:h-[500px] object-cover mx-auto select-none'
+                src="../../logo/delhi_technological_university_formerly_dce_cover.jpeg"
+                
+                className=' rounded-b-sm w-full max-w-full h-[200px] md:h-[400px] lg:h-[500px] object-cover mx-auto select-none'
               />
-            </SwiperSlide>
+            {/* </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
       </div>
 
       {/* About and Notices Section */}

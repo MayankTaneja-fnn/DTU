@@ -5,7 +5,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const logRouter=Router();
 
-logRouter.route("/getLogs").post( getLogs);
+logRouter.route("/getLogs").post(getLogs);
 logRouter.route("/add_log").post(jwtAuth,upload.array('photos'),insertLog);
 logRouter.route("/getLog/:id").get(jwtAuth,getLog);
 
