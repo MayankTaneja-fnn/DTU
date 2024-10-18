@@ -77,7 +77,7 @@ function Header() {
 
           {/* Login Dropdown */}
           <div
-            className={`absolute top-9 left-1/2 transform -translate-x-1/2 text-sm w-48 bg-white text-black p-2 shadow-md rounded-md transition-all duration-300 ${
+            className={`absolute top-9 left-1/2 transform -ml-6 -translate-x-1/2 text-sm w-48 bg-white text-black p-2 shadow-md rounded-md transition-all duration-300 ${
               isVisible ? 'block' : 'hidden'
             }`}
           >
