@@ -65,7 +65,7 @@ function Add_log() {
       formData.append('photos', photo); // 'photos' should match your backend field name
     });
   
-    axios.post(`${import.meta.env.BACKEND_URL}/logs/add_log`, formData, {
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/logs/add_log`, formData, {
       withCredentials: true,
       headers: {
         "Content-Type": "multipart/form-data", // Set the appropriate content type
@@ -83,7 +83,7 @@ function Add_log() {
   
 
   const handleLogOut=()=>{
-    axios.post(`${import.meta.env.BACKEND_URL}/student/logOut`,{},{
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/logOut`,{},{
       withCredentials: true
     })
     .then(function(response){
