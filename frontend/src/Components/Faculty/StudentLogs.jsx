@@ -24,7 +24,7 @@ function Logs() {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/logs/getLogs", {
+        const response = await axios.post(`${import.meta.env.BACKEND_URL}/logs/getLogs`, {
           email: email
         }, {
           withCredentials: true // Include cookies with the request
