@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import { Autoplay, A11y } from "swiper/modules";
+import { Autoplay, A11y, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
