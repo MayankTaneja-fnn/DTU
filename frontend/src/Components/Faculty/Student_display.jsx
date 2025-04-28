@@ -24,7 +24,7 @@ function Student_Display() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/faculty/display_students`, {
+        const response = await axios.get(`${import.meta.env.BACKEND_URL}/faculty/display_students`, {
           withCredentials: true // Include cookies with the request
         });
         setStudents(response.data.data);
@@ -38,7 +38,7 @@ function Student_Display() {
   }, []);
 
   const handleLogOut = () => {
-    axios.post("http://localhost:3000/faculty/logOut", {}, {
+    axios.post(`${import.meta.env.BACKEND_URL}/faculty/logOut`, {}, {
       withCredentials: true
     })
       .then(function (response) {
