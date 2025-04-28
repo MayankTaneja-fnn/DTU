@@ -33,7 +33,7 @@ function Attendance() {
   useEffect(() => {
     const fetchAttendance = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/faculty/get_attendance", {
+        const response = await axios.post(`${import.meta.env.BACKEND_URL}/faculty/get_attendance`, {
           email: email
         }, {
           withCredentials: true
