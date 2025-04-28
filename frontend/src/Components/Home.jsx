@@ -216,18 +216,15 @@
 
 // export default Home;
 
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import  SwiperCore,{ Autoplay, A11y, Navigation } from 'swiper';
-import  { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'swiper/css/autoplay';
-import 'swiper/css/controller';
-
-SwiperCore.use([Autoplay, A11y, Navigation]);
+import React from 'react';
+import { NavLink } from "react-router-dom";
+import { Autoplay, A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/controller";
+import { useSwiper } from 'swiper/react';
+import { useState,useEffect } from 'react';
 
 const programmes = [
   "../../Programmes/img1.jpg",
