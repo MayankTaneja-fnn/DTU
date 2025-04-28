@@ -57,7 +57,7 @@ function StudentRegister() {
         if(!validateForm()){
             return;
         }
-        axios.post("http://localhost:3000/student/student_register",{
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/student_register`,{
             fullName:fullName,
             email:email,
             roll_no:roll_no,
