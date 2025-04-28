@@ -219,13 +219,15 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Autoplay, A11y, Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
 import 'swiper/css/controller';
+
+SwiperCore.use([Autoplay, A11y, Navigation]);
 
 const programmes = [
   "../../Programmes/img1.jpg",
