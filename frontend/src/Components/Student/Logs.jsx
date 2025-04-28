@@ -21,7 +21,7 @@ function Logs() {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/logs/getLogs", {}, {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/logs/getLogs`, {}, {
           withCredentials: true // Include cookies with the request
         });
         setLogs(response.data.data);
@@ -41,7 +41,7 @@ function Logs() {
   }, [logs]);
 
   const handleLogOut = () => {
-    axios.post("http://localhost:3000/student/logOut", {}, {
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/logOut`, {}, {
       withCredentials: true
     })
       .then(response => {
