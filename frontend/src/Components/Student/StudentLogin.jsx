@@ -38,7 +38,7 @@ function StudentLogin() {
         if(!validateForm()){
             return;
         }
-        axios.post("http://localhost:3000/student/login",{
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/login`,{
             email:email,
             password:password
         },{
