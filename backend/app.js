@@ -9,7 +9,9 @@ import studentRouter from './src/routes/student.routes.js';
 import logRouter from './src/routes/logs.routes.js';
 import facultyRouter from './src/routes/faculty.routes.js';
 
-const MongoStore = connectMongo(session);
+// const MongoStore = connectMongo(session);
+const MongoStore = new (connectMongo(session))();
+
 const app = express();
 
 // Middleware for parsing cookies
