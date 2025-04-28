@@ -9,14 +9,14 @@ import studentRouter from './src/routes/student.routes.js';
 import logRouter from './src/routes/logs.routes.js';
 import facultyRouter from './src/routes/faculty.routes.js';
 
-// const MongoStore = connectMongo(session);
+const MongoStore = connectMongo(session);
 // const MongoStore = new (connectMongo(session))();
 
-const MongoStore =new connectMongo(session); // Still the function to be called
-const store = new MongoStore({
-  mongooseConnection: mongoose.connection,
-  collection: 'sessions'
-});
+// const MongoStore =new connectMongo(session); // Still the function to be called
+// const store = new MongoStore({
+//   mongooseConnection: mongoose.connection,
+//   collection: 'sessions'
+// });
 
 
 const app = express();
@@ -37,11 +37,11 @@ app.use(session({
         // resave:true,
         maxAge: 8 *60* 60 * 60 * 1000, // 8 hours
     },
-    store: store,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection // Ensure the session store uses the correct connection
+    }),
 }));
-// new MongoStore({
-//         mongooseConnection: mongoose.connection // Ensure the session store uses the correct connection
-//     }),
+
 // Middleware to set res.locals.email from session
 app.use((req, res, next) => {
     // console.log('Session:', req.session); // Log the entire session object
