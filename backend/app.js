@@ -12,7 +12,7 @@ import facultyRouter from './src/routes/faculty.routes.js';
 // const MongoStore = connectMongo(session);
 // const MongoStore = new (connectMongo(session))();
 
-const MongoStore = connectMongo(session); // Still the function to be called
+const MongoStore =new connectMongo(session); // Still the function to be called
 const store = new MongoStore({
   mongooseConnection: mongoose.connection,
   collection: 'sessions'
