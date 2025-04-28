@@ -218,8 +218,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Autoplay, A11y, Navigation } from 'swiper';
-import SwiperCore, { Swiper, SwiperSlide } from 'swiper/react';
+import  SwiperCore,{ Autoplay, A11y, Navigation } from 'swiper';
+import  { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
