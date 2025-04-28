@@ -16,7 +16,7 @@ function Student_Display_log() {
   const navigate=useNavigate();
 
   const handleLogOut = () => {
-    axios.post("http://localhost:3000/student/logOut", {}, {
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/logOut`, {}, {
       withCredentials: true
     })
       .then(function (response) {
@@ -32,7 +32,7 @@ function Student_Display_log() {
     const fetchLog = async () => {
       try {
         console.log("Fetching log data");
-        const response = await axios.get(`http://localhost:3000/logs/getLog/${id}`, {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/logs/getLog/${id}`, {
           withCredentials: true // Include cookies with the request
         });
         setLog(response.data.data);
