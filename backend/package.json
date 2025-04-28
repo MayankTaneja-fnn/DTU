@@ -27,6 +27,6 @@
     "nodemailer": "^6.9.15",
     "path": "^0.12.7",
     "uuid": "^10.0.0",
-    "connect-mongo": "^5.0.0"
+    "connect-mongo": "^3.2.0"
   }
 }
