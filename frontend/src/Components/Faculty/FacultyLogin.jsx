@@ -38,7 +38,7 @@ function FacultyLogin() {
         if(!validateForm()){
             return;
         }
-        axios.post(`${import.meta.env.BACKEND_URL}/faculty/login`,{
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/faculty/login`,{
             email:email,
             password:password
         },{
