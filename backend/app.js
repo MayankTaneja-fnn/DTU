@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.ORIGIN,
     credentials: true, // Allow credentials (cookies) to be sent
 }));
 
