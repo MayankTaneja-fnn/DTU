@@ -10,6 +10,15 @@ import logRouter from './src/routes/logs.routes.js';
 import facultyRouter from './src/routes/faculty.routes.js';
 
 const MongoStore = connectMongo(session);
+// const MongoStore = new (connectMongo(session))();
+
+// const MongoStore =new connectMongo(session); // Still the function to be called
+// const store = new MongoStore({
+//   mongooseConnection: mongoose.connection,
+//   collection: 'sessions'
+// });
+
+
 const app = express();
 
 // Middleware for parsing cookies
@@ -46,7 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.ORIGIN,
     credentials: true, // Allow credentials (cookies) to be sent
 }));
 

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function StudentHeader() {
     const navigate=useNavigate();
     const handleLogOut=()=>{
-        axios.post("http://localhost:3000/student/logOut",{},{
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/logOut`,{},{
           withCredentials:true
         })
         .then(function(response){

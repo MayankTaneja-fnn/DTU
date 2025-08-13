@@ -60,8 +60,9 @@ function Add_log() {
     photos.forEach((photo) => {
       formData.append('photos', photo);
     });
-    console.log(formData);
-    axios.post("http://localhost:3000/logs/add_log", formData, {
+
+  
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/logs/add_log`, formData, {
       withCredentials: true,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -77,8 +78,8 @@ function Add_log() {
       });
   };
 
-  const handleLogOut = () => {
-    axios.post("http://localhost:3000/student/logOut", {}, {
+  const handleLogOut=()=>{
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/logOut`,{},{
       withCredentials: true
     })
       .then(function (response) {
@@ -176,4 +177,6 @@ function Add_log() {
   )
 }
 
-export default Add_log;
+
+export default Add_log
+
