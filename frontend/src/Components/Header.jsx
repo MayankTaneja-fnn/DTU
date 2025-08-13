@@ -12,7 +12,7 @@ const Head = styled.section`
 `;
 
 const navItems = [
-  { name: 'Home', href: '/' },
+  { name: 'Home', href: '' },
   { name: 'About Us', href: '/about' },
   { name: 'Administration', href: '/admin' },
   { name: 'Admissions', href: '/admission' },
@@ -144,10 +144,9 @@ function Header() {
             <NavLink
               key={index}
               to={item.href}
-              className={`text-lg font-[Baskerville] ${
-                showNav ? 'text-black' : 'text-slate-600'
-              } transition-all duration-300`}
-              activeClassName="font-bold text-red-600 underline"
+              className={({ isActive }) =>
+                `text-xl font-[Baskerville] ${isActive ? 'font-bold text-red-600 underline' : showNav ? 'text-black' : 'text-slate-700'} transition-all duration-300`
+              }
             >
               <Nav>{item.name}</Nav>
             </NavLink>
