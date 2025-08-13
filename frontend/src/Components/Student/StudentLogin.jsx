@@ -38,16 +38,18 @@ function StudentLogin() {
         if(!validateForm()){
             return;
         }
+
         axios.post(`${import.meta.env.VITE_BACKEND_URL}/student/login`,{
             email:email,
             password:password
         },{
-            withCredentials: true // Important for sending/receiving cookies
+            withCredentials: true// Important for sending/receiving cookies 
+            
         })
         .then(function(response){
             setEmail("");
             setPassword("");
-            console.log(`Student Register successfully:`,response);
+            console.log(`Student Login successfully:`,response);
             let email=response.data.data.email;
             console.log(email);
             

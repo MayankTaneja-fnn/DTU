@@ -98,8 +98,14 @@ function Logs() {
           </div>
       </div>
 
+      <div className='w-screen flex justify-end mt-4'> 
+      <button className='border-2 border-slate-500 hover:bg-blue-300 border-solid w-auto rounded-xl h-auto text-xl font-mono text-center' onClick={()=>{navigate("/student/add_log")}}>
+                Add new log
+              </button> 
+      </div>
+
       {/* Main Content */}
-      <div className="pt-16 flex flex-col items-center">
+      <div className="pt-10  flex flex-col items-center">
         <div className="w-full flex justify-center mb-6">
           <input
             className="border-2 border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-[50%] px-4 py-2"

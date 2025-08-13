@@ -235,13 +235,13 @@ const programmes = [
   "../../Programmes/img6.jpg",
 ];
 
-const images = [
-  "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
-  "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
-  "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
-  "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
-  "../../logo/delhi_technological_university_formerly_dce_cover.jpeg"
-];
+// const images = [
+//   "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
+//   "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
+//   "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
+//   "../../logo/delhi_technological_university_formerly_dce_cover.jpeg",
+//   "../../logo/delhi_technological_university_formerly_dce_cover.jpeg"
+// ];
 
 function Home() {
   const [showNav, setShowNav] = useState(false);
@@ -326,12 +326,13 @@ function Home() {
         </div>
 
         {/* Message from VC and Dean */}
-        <div className="w-full ml-[2.5%] md:w-[35%] border-2 border-black border-double rounded-2xl">
+        <div className="w-full ml-2 md:w-[38%] border-2 border-black border-double rounded-2xl">
           <div className='w-full font-bold text-xl text-slate-800 font-serif mt-2 ml-2'>
             Message from Hon'ble VC
           </div>
           <div className='flex w-auto'>
             <div className='w-auto '>
+
               <img className='w-[1200px] rounded-sm ml-2 mt-5 h-32' src='../../logo/vc.jpg' />
             </div>
             <div className='leading-7 text-md text-justify text-slate-600 ml-5 mr-5 mt-2'>
