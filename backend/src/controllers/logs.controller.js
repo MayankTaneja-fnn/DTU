@@ -65,6 +65,7 @@ const insertLog =(asyncHandler(async(req,res)=>{
 
     // Retrieve the email from the session
     // const email = req.session.email;
+    console.log(email);
 
     const student =await Student.findOne({email});
 
