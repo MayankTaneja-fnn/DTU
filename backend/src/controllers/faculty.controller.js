@@ -33,7 +33,7 @@ const getLogs =(asyncHandler(async(req,res)=>{
 
 
 const getStudents =(asyncHandler(async(req,res)=>{
-    // console.log(req.session);
+    console.log(req.session);
     if (!req.session.email) {
         return res.status(401).send("Unauthorized: No session found");
         
@@ -94,7 +94,7 @@ const facultyLogin = asyncHandler(async (req, res) => {
         await res.cookie('auth_token', token, { httpOnly: true });
         
         req.session.email = email;
-        // console.log(req.session);
+        console.log(req.session);
         // Successful login, redirect to logs
         res.status(201)
         .json(
