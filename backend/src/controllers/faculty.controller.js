@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asynchandler.js"
 import { ApiError } from "../utils/ApiError.js"
-import ApiResponse from "../utils/ApiResponse.js"
+import ApiResponse from "../utils/apiResponse.js"
 import { Faculty } from "../models/faculty.model.js"
 import { Student } from "../models/student.model.js"
 import { Logs } from "../models/logs.model.js"
