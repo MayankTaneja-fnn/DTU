@@ -16,7 +16,7 @@ const jwtAuth = (req, res, next)=>{
         );
         // console.log(payload.email);
         req.user_email = payload.email;
-        // console.log(req.user_email);
+        console.log(req.user_email);
        // console.log(payload);
         // console.log(payload);
     } catch(err){
