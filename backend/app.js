@@ -33,7 +33,8 @@ app.use(session({
     resave: false, // Avoid resaving unchanged sessions
     saveUninitialized: false, // Only save sessions that are modified
     cookie: {
-        secure: false, // Set to true if using HTTPS
+       secure: true,        // ✅ must be true in production (HTTPS)
+       sameSite: "none", 
         // resave:true,
         maxAge: 8 *60* 60 * 60 * 1000, // 8 hours
     },
