@@ -67,9 +67,10 @@ const studentLogin = asyncHandler(async (req, res) => {
     if (result) {
         const token =await jwt.sign({ username: student.fullName, email: student.email }, "VOp2tCqr1f", { expiresIn: '8h' });
         // console.log(token);
-        await res.cookie('auth_token', token, { httpOnly: true });
+        await res.cookie('auth_token', token, { httpOnly: true,secure: true,
+    sameSite: "none", });
         
-        req.session.email = email;
+        // req.session.email = email;
         // console.log(req.session);
         // Successful login, redirect to logs
         res.status(201)
