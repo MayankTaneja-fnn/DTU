@@ -33,8 +33,9 @@ const getLogs =(asyncHandler(async(req,res)=>{
 
 
 const getStudents =(asyncHandler(async(req,res)=>{
-    console.log(req.session);
-    if (!req.session.email) {
+    // console.log(req.session);
+    let email=req.user_email;
+    if (!email) {
         return res.status(401).send("Unauthorized: No session found");
         
     }
