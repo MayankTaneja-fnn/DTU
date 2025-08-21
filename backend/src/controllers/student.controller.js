@@ -82,18 +82,26 @@ const studentLogin = asyncHandler(async (req, res) => {
     }
 });
 
-const studentLogOut=asyncHandler(async(req,res)=>{
-    // console.log(req.session);
-    await req.session.destroy(async(err) => {
-        if (err) {
-             res.status(400).send('Not able to logout');
-        }
-        res.clearCookie('connect.sid');
-        await res.clearCookie('auth_token');
-        console.log("logout successful");
-        res.status(200).send("Logout successful")
+const studentLogOut = asyncHandler(async (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.status(400).send("Not able to logout");
+    }
+
+    // Clear cookies with same options used when setting
+    res.clearCookie("connect.sid", { path: "/" });
+    res.clearCookie("auth_token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      path: "/",
     });
+
+    console.log("logout successful");
+    return res.status(200).send("Logout successful");
+  });
 });
+
 
 
 export {
