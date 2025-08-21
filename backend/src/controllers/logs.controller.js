@@ -70,16 +70,22 @@ const insertLog =(asyncHandler(async(req,res)=>{
 
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0];
-    // console.log(student);
+    console.log(student);
+    if (!student.attendance) {
+      student.attendance = [];
+    }
+    student.attendance.push(formattedDate);
+    await student.save();
+
 
     // student.attendance.push(formattedDate);
 
     // await student.save();
-    await Student.findByIdAndUpdate(
-      email,
-      { $push: { attendance: formattedDate } },
-      { new: true, upsert: true }  // upsert ensures field is created
-    );
+    // await Student.findByIdAndUpdate(
+    //   email,
+    //   { $push: { attendance: formattedDate } },
+    //   { new: true, upsert: true }  // upsert ensures field is created
+    // );
 
 
     const {fullName,roll_no}=student;
