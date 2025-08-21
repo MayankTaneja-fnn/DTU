@@ -95,8 +95,8 @@ const facultyLogin = asyncHandler(async (req, res) => {
         await res.cookie('auth_token', token, { httpOnly: true,secure: true,
       sameSite: "none" ,domain:"dtu-72xa.onrender.com"});
         
-        req.session.email = email;
-        console.log(req.session);
+        // req.session.email = email;
+        // console.log(req.session);
         // Successful login, redirect to logs
         res.status(201)
         .json(
