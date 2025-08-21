@@ -70,10 +70,17 @@ const insertLog =(asyncHandler(async(req,res)=>{
 
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split('T')[0];
+    // console.log(student);
 
-    student.attendance.push(formattedDate);
+    // student.attendance.push(formattedDate);
 
-    await student.save();
+    // await student.save();
+    await Student.findByIdAndUpdate(
+      email,
+      { $push: { attendance: formattedDate } },
+      { new: true, upsert: true }  // upsert ensures field is created
+    );
+
 
     const {fullName,roll_no}=student;
     // console.log(req.files);
