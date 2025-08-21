@@ -6,7 +6,7 @@ const facultyRouter=Router();
 
 facultyRouter.route("/login").post(facultyLogin);
 facultyRouter.route("/logOut").post(facultyLogOut);
-facultyRouter.route("/display_students").get(getStudents);
+facultyRouter.route("/display_students").get(jwtAuth,getStudents);
 facultyRouter.route("/getLogs").post(getLogs)
 facultyRouter.route("/get_attendance").post(getAttendance);
 
