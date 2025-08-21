@@ -92,7 +92,7 @@ const facultyLogin = asyncHandler(async (req, res) => {
         const token =await jwt.sign({ username: faculty.fullName, email: faculty.email }, "VOp2tCqr1f", { expiresIn: '8h' });
         // console.log(token);
         await res.cookie('auth_token', token, { httpOnly: true,secure: true,
-      sameSite: "none" });
+      sameSite: "none" ,domain:"dtu-72xa.onrender.com"});
         
         req.session.email = email;
         console.log(req.session);
