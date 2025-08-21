@@ -29,7 +29,7 @@ app.use(express.json());
 
 // Session middleware
 app.use(session({
-    secret: 'SecretKey', // Replace with a secure key in production
+    secret: 'VOp2tCqr1f', // Replace with a secure key in production
     resave: false, // Avoid resaving unchanged sessions
     saveUninitialized: false, // Only save sessions that are modified
     cookie: {
