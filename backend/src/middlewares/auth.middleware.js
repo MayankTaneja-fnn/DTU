@@ -15,7 +15,7 @@ const jwtAuth = (req, res, next)=>{
             "VOp2tCqr1f"
         );
         // console.log(payload.email);
-        // req.user_email = payload.email;
+        req.user_email = payload.email;
         // console.log(req.user_email);
        // console.log(payload);
         // console.log(payload);
