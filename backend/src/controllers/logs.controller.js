@@ -14,8 +14,8 @@ const getLogs =(asyncHandler(async(req,res)=>{
     // }
 
     // Retrieve the email from the session
-    const email =req.body.email|| req.session.email;
-    console.log(email);
+    const email =req.body.email|| req.user_email;
+    // console.log(email);
     // console.log(req.session);
     const logs=await Logs.find({email});
     if(logs){
@@ -31,7 +31,8 @@ const getLogs =(asyncHandler(async(req,res)=>{
 
 const getLog = asyncHandler(async (req, res) => {
     // Ensure a session exists
-    if (!req.session.email) {
+    let email=req.user_email;
+    if (!email) {
         return res.status(401).send("Unauthorized: No session found");
     }
 
@@ -57,13 +58,13 @@ const getLog = asyncHandler(async (req, res) => {
 });
 
 const insertLog =(asyncHandler(async(req,res)=>{
-
-    if (!req.session.email) {
+    let email=req.user_email;
+    if (!email) {
         return res.status(401).send("Unauthorized: No session found");
     }
 
     // Retrieve the email from the session
-    const email = req.session.email;
+    // const email = req.session.email;
 
     const student =await Student.findOne({email});
 
