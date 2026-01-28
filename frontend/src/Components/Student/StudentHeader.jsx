@@ -49,7 +49,7 @@ function StudentHeader({ userType = "student" }) {
       {/* Right Section */}
       <div className="flex items-center mt-4 md:mt-0 md:ml-auto gap-6">
         <img
-          src="/logo/G20Whiteback_processed.jpg"
+          src="/logo/G20Whiteback_processed-removebg-preview__2_-removebg-preview.png"
           alt="G20 Image"
           className="h-16 w-auto"
         />

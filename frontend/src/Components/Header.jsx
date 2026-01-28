@@ -44,7 +44,7 @@ function Header() {
       <div className="flex md:flex-row bg-gradient-to-r from-[#d5f5fa] via-[#B2E9FD] to-[#8CD3FD] w-full h-auto md:h-32 items-center p-4 md:py-0 relative">
         {/* DTU Logo */}
         <img
-          src="../../logo/DTU_official_logo.png"
+          src="/logo/DTU_official_logo.png"
           alt="DTU Logo"
           className="h-20 w-32 md:h-24 md:w-28 mb-4 md:mb-0 px-1 opacity-85"
         />
@@ -61,7 +61,7 @@ function Header() {
 
         {/* G20 Image */}
         <img
-          src="../../logo/G20Whiteback_processed-removebg-preview__2_-removebg-preview.png"
+          src="/logo/G20Whiteback_processed-removebg-preview__2_-removebg-preview.png"
           alt="G20 Image"
           className="h-16 w-28 md:h-20 md:w-36 mt-1 md:mt-0 md:-ml-20 px-2"
         />
@@ -77,9 +77,8 @@ function Header() {
 
           {/* Login Dropdown */}
           <div
-            className={`absolute top-9 left-1/2 transform -ml-6 -translate-x-1/2 text-sm w-48 bg-white text-black p-2 shadow-md rounded-md transition-all duration-300 ${
-              isVisible ? 'block' : 'hidden'
-            }`}
+            className={`absolute top-9 left-1/2 transform -ml-6 -translate-x-1/2 text-sm w-48 bg-white text-black p-2 shadow-md rounded-md transition-all duration-300 ${isVisible ? 'block' : 'hidden'
+              }`}
           >
             <Link to="/student/register" className="block py-1 hover:bg-gray-200">
               Student Register
@@ -112,9 +111,8 @@ function Header() {
 
         {/* Side Nav for Small Screens */}
         <div
-          className={`fixed z-50 top-0 left-0 w-64 h-full bg-[#c4ecfc] transform ${
-            isOpen ? 'translate-x-0' : '-translate-x-full'
-          } transition-transform duration-300 md:hidden`}
+          className={`fixed z-50 top-0 left-0 w-64 h-full bg-[#c4ecfc] transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
+            } transition-transform duration-300 md:hidden`}
         >
           <button onClick={toggleMenu} className="absolute top-4 right-4 text-xl">
             &times;
@@ -136,9 +134,8 @@ function Header() {
 
         {/* Horizontal Nav for Larger Screens */}
         <nav
-          className={`${
-            showNav ? 'fixed top-0 bg-[#c4ecfc] shadow-md' : ''
-          } w-full hidden md:flex justify-between items-center pl-7 pr-5 font-semibold z-50 bg-gradient-to-r from-[#d5f5fa] via-[#B2E9FD] to-[#8CD3FD]`}
+          className={`${showNav ? 'fixed top-0 bg-[#c4ecfc] shadow-md' : ''
+            } w-full hidden md:flex justify-between items-center pl-7 pr-5 font-semibold z-50 bg-gradient-to-r from-[#d5f5fa] via-[#B2E9FD] to-[#8CD3FD]`}
         >
           {navItems.map((item, index) => (
             <NavLink

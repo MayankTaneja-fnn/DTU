@@ -1,5 +1,7 @@
 # EO Portal
 
+### [🚀 Live Demo: dtu-sjva.vercel.app](https://dtu-sjva.vercel.app)
+
 EO Portal is a comprehensive management system designed for students and faculty. It facilitates student log management, attendance tracking, and provides a centralized platform for academic and administrative information.
 
 ## 🚀 Features
@@ -83,7 +85,10 @@ cd DTU
    ```bash
    npm install
    ```
-3. Create a `.env` file (if necessary) for API configuration.
+3. Create a `.env` file and add the following:
+   ```env
+   VITE_BACKEND_URL=http://localhost:8000
+   ```
 4. Start the frontend:
    ```bash
    npm run dev
