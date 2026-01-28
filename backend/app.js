@@ -22,6 +22,9 @@ const MongoStore = connectMongo(session);
 
 const app = express();
 
+// Required for Render and other proxies to trust the HTTPS headers
+app.set('trust proxy', 1);
+
 // Middleware for parsing cookies
 app.use(cookieParser());
 
