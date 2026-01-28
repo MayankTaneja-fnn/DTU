@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -34,15 +35,20 @@ app.use(session({
     saveUninitialized: false, // Only save sessions that are modified
     cookie: {
         httpOnly: true,
-       secure: true,        // ✅ must be true in production (HTTPS)
-       sameSite: "none", 
+        secure: false,        // Set to false for HTTP localhost
+        sameSite: "lax",      // Set to lax for HTTP localhost
         // resave:true,
-        maxAge: 8 *60* 60 * 60 * 1000, // 8 hours
+        maxAge: 8 * 60 * 60 * 60 * 1000, // 8 hours
     },
     store: new MongoStore({
         mongooseConnection: mongoose.connection // Ensure the session store uses the correct connection
     }),
 }));
+
+import './src/passport/passport.js';
+import passport from 'passport';
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware to set res.locals.email from session
 app.use((req, res, next) => {
@@ -57,7 +63,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
 app.use(cors({
-    origin: process.env.ORIGIN,
+    origin: process.env.ORIGIN || "http://localhost:5173",
     credentials: true, // Allow credentials (cookies) to be sent
 }));
 
@@ -67,7 +73,7 @@ app.use(express.static('/public'));
 // Importing routes
 app.use('/student', studentRouter);
 app.use('/logs', logRouter);
-app.use('/faculty',facultyRouter);
+app.use('/faculty', facultyRouter);
 
 // Export the app
 export {

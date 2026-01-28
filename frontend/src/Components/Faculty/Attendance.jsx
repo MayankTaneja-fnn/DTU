@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import StudentHeader from '../Student/StudentHeader.jsx';
 
 const Head = styled.section`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -13,22 +14,11 @@ const Head = styled.section`
 function Attendance() {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   const [highlightDates, setHighlightDates] = useState([]); // Initialize with an empty array
   const [studentInfo, setStudentInfo] = useState({ name: '', rollNo: '' });
   const [error, setError] = useState("");
   const email = location.state.key || ''; // Ensure 'key' is accessed safely
-
-  const handleLogOut = () => {
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/faculty/logOut`, {}, { withCredentials: true })
-      .then(function (response) {
-        console.log("logout successful", response);
-        navigate("/faculty/login");
-      })
-      .catch(function (errors) {
-        console.log(errors);
-      });
-  };
 
   useEffect(() => {
     const fetchAttendance = async () => {
@@ -55,7 +45,7 @@ function Attendance() {
     fetchAttendance();
   }, [email]);
 
-  
+
 
   const [date, changeDate] = useState(new Date());
 
@@ -70,78 +60,101 @@ function Attendance() {
     return `${year}-${month}-${day}`;
   };
 
+
   const isHighlighted = (date) => {
     const dateString = formatDate(date);
     return highlightDates.includes(dateString); // Ensure highlightDates is an array
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center">
-      {/* Header */}
-      <div className="flex items-center bg-gradient-to-r from-[#d5f5fa] via-[#B2E9FD] to-[#8CD3FD] w-full h-auto md:h-32 p-4 md:py-0 relative">
-        {/* Left Section */}
-        <div className="flex md:flex-row w-[70%]">
-          {/* DTU Logo */}
-          <img
-            src="../../logo/DTU_official_logo.png"
-            alt="DTU Logo"
-            className="h-20 w-32 md:h-24 md:w-28 mb-4 md:mb-0 px-1 opacity-85"
-          />
-          {/* Department Information */}
-          <div className="text-center md:text-left md:ml-4 w-[70%] mt-2">
-            <h1 className="text-lg md:text-3xl font-bold font-[Baskerville] text-white">
-              <Head>Centre of Extension and Field Outreach</Head>
-            </h1>
-            <h2 className="text-sm md:text-lg font-[Georgia] text-slate-500 ml-1 mt-1">
-              Delhi Technological University
-            </h2>
-          </div>
-        </div>
-        {/* Right Section */}
-        <div className="flex items-center">
-          <img src="../../../logo/G20Whiteback_processed-removebg-preview__2_-removebg-preview.png" alt="G20 Image" className="h-16 w-28 ml-12" />
-          <button className="bg-white ml-16 text-red-700 font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 hover:text-white transition-all duration-300" onClick={handleLogOut}>
-            LogOut
+    <div className="min-h-screen bg-[#f0f9ff] font-sans">
+      <StudentHeader userType="faculty" />
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex items-center mb-6">
+          <button onClick={() => { navigate("/faculty/student_display") }} className="group flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+            <FaArrowAltCircleLeft className='w-8 h-8 mr-2 group-hover:-translate-x-1 transition-transform' />
+            <span className="text-lg font-medium">Back to Students List</span>
           </button>
         </div>
-      </div>
-      <div className="flex justify-center mb-4">
-        <FaArrowAltCircleLeft className='text-blue-800 w-8 h-8 cursor-pointer' onClick={() => { navigate("/faculty/student_display") }} />
-      </div>
-      {/* Student Info */}
-      <div className="mt-8 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800">Student Name: {studentInfo.name}</h2>
-        <h2 className="text-xl text-gray-600 mt-2">Roll No.: {studentInfo.rollNo}</h2>
-        <h2 className="text-xl text-gray-600 mt-2">Total Attendance: {highlightDates.length}</h2>
-        <h2 className="text-xl text-gray-600 mt-2">Dates on which student was present: {highlightDates.map((date,index)=>(
-          <span key={index}>{date} {index==highlightDates.length-1?null:', '}</span>
-        ))}</h2>
-        
-      </div>
 
-      {/* Calendar Section */}
-      <div className="flex w-full justify-center py-10">
-        <div className="bg-white rounded-lg shadow-lg p-8 w-[90%] md:w-[60%] ">
-          <div className='w-full flex justify-center'>
-          <Calendar 
-            onChange={changeValue}
-            value={date}
-            tileClassName={({ date }) => isHighlighted(date) ? 'highlight' : ''}
-            className="rounded-lg w-full"
-          />
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Student Info Card */}
+          <div className="md:col-span-1">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-50 h-full">
+              <h2 className="text-2xl font-bold text-blue-900 mb-6 border-b border-gray-100 pb-2">Student Details</h2>
+
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold">Name</p>
+                  <p className="text-xl font-medium text-gray-800">{studentInfo.name}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold">Roll Number</p>
+                  <p className="text-lg font-medium text-gray-800 font-mono">{studentInfo.rollNo}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold">Total Attendance</p>
+                  <div className="flex items-center mt-1">
+                    <span className="text-4xl font-bold text-blue-600">{highlightDates.length}</span>
+                    <span className="text-gray-400 ml-2 text-sm">days present</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <p className="text-sm text-gray-500 uppercase tracking-wider font-semibold mb-2">Previous Dates</p>
+                <div className="flex flex-wrap gap-2 max-h-60 overflow-y-auto custom-scrollbar">
+                  {highlightDates.map((date, index) => (
+                    <span key={index} className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-100">
+                      {date}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-lg font-semibold text-center mt-4 text-gray-700">
-            Selected Date: <span className="text-blue-600">{date.toLocaleDateString()}</span>
-          </p>
+
+          {/* Calendar Card */}
+          <div className="md:col-span-2">
+            <div className="bg-white rounded-3xl shadow-xl p-8 border border-blue-50 flex flex-col items-center">
+              <h2 className="text-2xl font-bold text-blue-900 mb-6">Attendance Calendar</h2>
+              <div className='w-full max-w-md calendar-container'>
+                <Calendar
+                  onChange={changeValue}
+                  value={date}
+                  tileClassName={({ date }) => isHighlighted(date) ? 'highlight' : ''}
+                  className="rounded-xl border-none shadow-sm w-full p-2"
+                />
+              </div>
+              <p className="text-lg font-medium text-gray-600 mt-6 bg-blue-50 px-6 py-2 rounded-full">
+                Selected Date: <span className="text-blue-700 font-bold ml-1">{date.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Add some custom styling for highlighted dates */}
       <style>{`
         .highlight {
-          background-color: #ffdd57 !important;
-          color: black !important;
-          font-weight: bold;
+          background-color: #10b981 !important;
+          color: white !important;
+          border-radius: 50%;
+        }
+        .react-calendar {
+            border: none;
+            font-family: inherit;
+        }
+        .react-calendar__tile {
+            padding: 1rem 0.5rem;
+        }
+        .react-calendar__navigation button {
+            color: #1e3a8a;
+            font-size: 1.2rem;
+        }
+        .react-calendar__month-view__days__day--weekend {
+            color: #ef4444;
         }
       `}</style>
     </div>

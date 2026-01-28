@@ -8,64 +8,64 @@ import { Logs } from "../models/logs.model.js"
 import axios from "axios"
 import jwt from "jsonwebtoken";
 
-const getLogs =(asyncHandler(async(req,res)=>{
+const getLogs = (asyncHandler(async (req, res) => {
     // console.log(req.session);
     // if (!req.session.email) {
     //     return res.status(401).send("Unauthorized: No session found");
     // }
 
     // Retrieve the email from the session
-    const email =req.body.email;
+    const email = req.body.email;
     // console.log(email);
     // console.log(req.session);
-    const logs=await Logs.find({email});
-    if(logs){
+    const logs = await Logs.find({ email });
+    if (logs) {
         res.status(201)
-        .json(
-            new ApiResponse(201, logs, "log created successfully")
-        )
+            .json(
+                new ApiResponse(201, logs, "log created successfully")
+            )
     }
-    else{
-    res.status(400).send("No Logs found");
+    else {
+        res.status(400).send("No Logs found");
     }
 }))
 
 
 
-const getStudents =(asyncHandler(async(req,res)=>{
+const getStudents = (asyncHandler(async (req, res) => {
     // console.log(req.session);
-    let email=req.user_email;
+    let email = req.user_email;
     if (!email) {
         return res.status(401).send("Unauthorized: No session found");
-        
+
     }
 
     // Retrieve the email from the session
     // const email = req.session.email;
     // console.log(req.session);
-    const students=await Student.find();
-    if(students){
+    const students = await Student.find();
+    if (students) {
         res.status(201)
-        .json(
-            new ApiResponse(201, students, " successfully")
-        )
+            .json(
+                new ApiResponse(201, students, " successfully")
+            )
     }
-    else{
-    res.status(400).send("No students found");
+    else {
+        res.status(400).send("No students found");
     }
 }))
 
-const getAttendance=asyncHandler(async(req,res)=>{
-    const email =req.body.email;
-    const student =await Student.findOne({email});
-    if(!student){
+const getAttendance = asyncHandler(async (req, res) => {
+    const email = req.body.email;
+    const student = await Student.findOne({ email });
+    if (!student) {
         res.send(400).send("No student found");
     }
-    else{
+    else {
         res.status(201)
-        .json(
-            new ApiResponse(201, student, " successfully")
-        )
+            .json(
+                new ApiResponse(201, student, " successfully")
+            )
     }
 
 })
@@ -88,43 +88,47 @@ const facultyLogin = asyncHandler(async (req, res) => {
     }
 
     // Compare the password
-    const result = faculty.password&&password;
+    const result = faculty.password === password; // Fixed comparison from && to ===
     if (result) {
-        const token =await jwt.sign({ username: faculty.fullName, email: faculty.email }, "VOp2tCqr1f", { expiresIn: '8h' });
-        // console.log(token);
-        await res.cookie('auth_token', token, { httpOnly: true,secure: true,
-      sameSite: "none" ,domain:"dtu-72xa.onrender.com",path: "/"});
-        
-        // req.session.email = email;
-        // console.log(req.session);
-        // Successful login, redirect to logs
+        const token = jwt.sign({ username: faculty.fullName, email: faculty.email }, process.env.JWT_SECRET || "VOp2tCqr1f", { expiresIn: '8h' });
+
+        // Retrieve the origin to set the domain dynamically if needed, or omit domain for localhost
+        // For localhost, skipping domain is usually best.
+        res.cookie('auth_token', token, {
+            httpOnly: true,
+            secure: false,       // Set to false for HTTP localhost
+            sameSite: "lax",     // Set to lax for HTTP localhost
+            path: "/"
+        });
+
+        // Successful login
         res.status(201)
-        .json(
-            new ApiResponse(201, faculty, "student created successfully")
-        )
+            .json(
+                new ApiResponse(201, faculty, "Faculty logged in successfully")
+            )
     } else {
-       res.status(400).send("Incorrect Credentials");
+        res.status(400).send("Incorrect Credentials");
     }
 });
 
 const facultyLogOut = asyncHandler(async (req, res) => {
-  req.session.destroy(err => {
-    if (err) {
-      return res.status(400).send("Not able to logout");
-    }
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(400).send("Not able to logout");
+        }
 
-    // Clear cookies with same options used when setting
-    res.clearCookie("connect.sid", { path: "/" });
-    res.clearCookie("auth_token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      path: "/",
+        // Clear cookies with same options used when setting
+        res.clearCookie("connect.sid", { path: "/" });
+        res.clearCookie("auth_token", {
+            httpOnly: true,
+            secure: false,    // Match login settings
+            sameSite: "lax",  // Match login settings
+            path: "/",
+        });
+
+        console.log("logout successful");
+        return res.status(200).send("Logout successful");
     });
-
-    console.log("logout successful");
-    return res.status(200).send("Logout successful");
-  });
 });
 
 

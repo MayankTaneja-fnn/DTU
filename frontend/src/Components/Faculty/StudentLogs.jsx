@@ -4,11 +4,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-import styled from 'styled-components';
+import StudentHeader from '../Student/StudentHeader.jsx';
 
-const Head = styled.section`
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-`;
 
 function Logs() {
   const [logs, setLogs] = useState([]);
@@ -16,6 +13,7 @@ function Logs() {
   const [name, setName] = useState("");
   const [roll_no, setRoll_no] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   let navigate = useNavigate();
   let location = useLocation();
@@ -33,6 +31,8 @@ function Logs() {
       } catch (err) {
         setError(err.response?.data || "An error occurred while fetching logs");
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -46,18 +46,6 @@ function Logs() {
     }
   }, [logs]);
 
-  const handleLogOut = () => {
-    axios.post(`${import.meta.env.VITE_BACKEND_URL}/faculty/logOut`, {}, {
-      withCredentials: true
-    })
-      .then(response => {
-        console.log("Logout successful", response);
-        navigate("/faculty/login");
-      })
-      .catch(errors => {
-        console.log(errors);
-      });
-  };
 
   const displayLog = (log) => {
     navigate(`/faculty/display_log`, { state: { key: log._id } });
@@ -67,87 +55,93 @@ function Logs() {
     setSearchTerm(event.target.value);
   };
 
+
   const filteredLogs = logs.filter(log =>
     log.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     log.createdAt.slice(0, 10).includes(searchTerm)
   );
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <div className="flex items-center bg-gradient-to-r from-[#d5f5fa] via-[#B2E9FD] to-[#8CD3FD] w-full h-auto md:h-32 p-4 md:py-0 relative">
-          {/* Left Section */}
-          <div className="flex md:flex-row w-[70%]">
-          {/* DTU Logo */}
-          <img
-            src="../../logo/DTU_official_logo.png"
-            alt="DTU Logo"
-            className="h-20 w-32 md:h-24 md:w-28 mb-4 md:mb-0 px-1 opacity-85"
-          />
+    <div className="min-h-screen bg-[#f0f9ff] font-sans">
+      <StudentHeader userType="faculty" />
 
-          {/* Department Information */}
-          <div className="text-center md:text-left md:ml-4 w-[70%] mt-2">
-            <h1 className="text-lg md:text-3xl font-bold font-[Baskerville] text-white">
-              <Head>Centre of Extension and Field Outreach</Head>
-            </h1>
-            <h2 className="text-sm md:text-lg font-[Georgia] text-slate-500 ml-1 mt-1">
-              Delhi Technological University
-            </h2>
-          </div>
-          </div>
-          {/* Right Section */}
-          <div className="flex items-center ">
-            <img src="../../../logo/G20Whiteback_processed-removebg-preview__2_-removebg-preview.png" alt="G20 Image" className="h-16 w-28 ml-12" />
-            <button className="bg-white ml-16 text-red-700 font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 hover:text-white transition-all duration-300" onClick={handleLogOut}>
-              LogOut
-            </button>
-          </div>
-      </div>
-
-      {/* Navigation Back Button */}
-      <div className="flex justify-center mb-4">
-        <FaArrowAltCircleLeft className='text-blue-800 w-8 h-8 cursor-pointer' onClick={() => { navigate("/faculty/student_display") }} />
-      </div>
-
-      {/* Main Content */}
-      <div className="pt-8 flex flex-col items-center">
-        <div className="w-full flex justify-center mb-6">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchInputChange}
-            placeholder="Search by title or date"
-            className="border-2 border-gray-300 rounded-full py-2 px-4 w-1/2 transition duration-300 focus:outline-none focus:border-blue-500"
-          />
-          <button className="ml-2 w-12 flex items-center justify-center bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors">
-            <FontAwesomeIcon icon={faSearch} />
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Navigation Back */}
+        <div className="flex justify-between items-center mb-6">
+          <button onClick={() => { navigate("/faculty/student_display") }} className="group flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+            <FaArrowAltCircleLeft className='w-8 h-8 mr-2 group-hover:-translate-x-1 transition-transform' />
+            <span className="text-lg font-medium">Back to Students List</span>
           </button>
-        </div>
 
-        <div className="text-center w-full mb-4">
-          <h2 className="text-xl font-semibold">Student Name: {name || "User"}</h2>
-          <h2 className="text-xl font-semibold">Student Roll No.: {roll_no || "Not Available"}</h2>
-          <h2 className="text-xl font-semibold">Total logs: {logs.length || "0"}</h2>
-        </div>
-
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full px-4'>
-          {filteredLogs.map((log, index) => (
-            <div
-              key={index}
-              onClick={() => displayLog(log)}
-              className="bg-white border-2 border-gray-300 rounded-lg shadow-lg transition-shadow duration-300 cursor-pointer hover:shadow-xl"
-            >
-              <img
-                src={log.photos[0]}
-                alt={log.title}
-                className="w-full h-48 object-cover rounded-t-lg"
-              />
-              <div className="p-4">
-                <div className="font-bold text-lg text-gray-800">{log.title}</div>
-                <div className="text-sm text-gray-500">{log.createdAt.slice(0, 10)}</div>
+          <div className="text-right">
+            {name && (
+              <div>
+                <span className="text-gray-500 mr-2">Viewing Logs for:</span>
+                <span className="font-bold text-blue-900 text-lg">{name}</span>
+                {roll_no && <span className="text-gray-400 font-mono ml-2">({roll_no})</span>}
               </div>
+            )}
+          </div>
+        </div>
+
+        {/* Search Bar */}
+        <div className="flex justify-center mb-10">
+          <div className="relative w-full max-w-xl">
+            <input
+              className="w-full px-6 py-3 bg-white border border-blue-100 rounded-full shadow-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all pl-12"
+              value={searchTerm}
+              onChange={handleSearchInputChange}
+              placeholder="Search logs by title or date..."
+            />
+            <FontAwesomeIcon icon={faSearch} className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex flex-col items-center">
+          {isLoading ? (
+            <div className="flex items-center justify-center space-x-2 text-blue-600 mt-12">
+              <svg className="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span className="text-lg font-medium">Loading logs...</span>
             </div>
-          ))}
+          ) : (
+            filteredLogs.length > 0 ? (
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full'>
+                {filteredLogs.map((log, index) => (
+                  <div
+                    key={index}
+                    onClick={() => displayLog(log)}
+                    className="group bg-white rounded-2xl shadow-lg border border-blue-50 overflow-hidden cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div className='relative h-56 overflow-hidden'>
+                      <img
+                        src={log.photos[0]}
+                        alt={log.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                        <span className="text-white font-medium">View Details</span>
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <h3 className="font-bold text-xl text-blue-900 mb-2 line-clamp-1">{log.title}</h3>
+                      <p className="text-sm text-gray-500 font-mono bg-blue-50 inline-block px-3 py-1 rounded-full">
+                        {log.createdAt.slice(0, 10)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <p className="text-gray-500 text-lg">No logs found for this student.</p>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>

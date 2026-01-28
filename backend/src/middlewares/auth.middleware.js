@@ -1,28 +1,25 @@
 import jwt from 'jsonwebtoken';
-const jwtAuth = (req, res, next)=>{
+const jwtAuth = (req, res, next) => {
     // 1. Read the token.
     const token = req.cookies.auth_token;
     // console.log(token);
     // 2. if no token, return the error.
-    if(!token){
+    if (!token) {
         return res.status(401).send("Unauthorized");
     }
     // 3. check if token is valid.
-    try{
-      
+    try {
+
         const payload = jwt.verify(
             token,
-            "VOp2tCqr1f"
+            process.env.JWT_SECRET || "VOp2tCqr1f"
         );
-        // console.log(payload.email);
+        // console.log("Token verified successfully for: ", payload.email);
         req.user_email = payload.email;
-        console.log(req.user_email);
-       // console.log(payload);
-        // console.log(payload);
-    } catch(err){
+    } catch (err) {
         // 4. return error.
-        console.log(err);
-        return res.status(401).send("Unauthorized");
+        console.error("JWT Verification failed:", err.message);
+        return res.status(401).send("Unauthorized: Invalid Token");
     }
 
     // 5. call next middleware.
